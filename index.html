@@ -84,7 +84,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -113,12 +113,12 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="en en-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="en en-home fa-fw"></i>Startseite</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="en en-home fa-fw"></i>الأرشيفات</a>
+    <a href="/archives/" rel="section"><i class="en en-home fa-fw"></i>Archiv</a>
 
   </li>
   </ul>
@@ -170,10 +170,10 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2025-08-02 19:33:39 / عُدل: 20:59:39" itemprop="dateCreated datePublished" datetime="2025-08-02T19:33:39+09:00">2025-08-02</time>
+              <time title="Erstellt: 2025-08-02 19:33:39 / Geändert am: 21:31:28" itemprop="dateCreated datePublished" datetime="2025-08-02T19:33:39+09:00">2025-08-02</time>
             </span>
 
           
@@ -188,43 +188,42 @@
 
       
           <p>前言<br>    在数字时代，拥有一个自己的博客网站不仅能够展示个人观点，也是促进技术成长的重要途径。作为全球最受欢迎的博客系统之一，WordPress 以其丰富的插件、凭借其高度灵活、可定制的主题功能，以及一个充满活力、积极互动的庞大用户社区，WordPress赢得了全球众多网站创建者和内容创作者的广泛喜爱与持续支持。<br>    但是，不当操作WordPress主题或插件时，可能会引发一系列问题，包括：数据损坏、网站无法正常访问、底层数据无法修复，文章post，page数据丢失。这些风险往往源于插件或主题存在漏洞未及时更新、数据配置不正确或与现有系统不兼容等原因。<br>    今天写这篇博文记录一下前段时间折腾 WordPress 时，踩过的坑。一个看起来酷炫的主题安装后直接把后台锁死，让我连控制台都进不去；还有一次没及时备份数据，不小心安装了一个插件，所有的个人设置瞬间被覆盖，之前辛辛苦苦写的内容只能从头来过。那种心累和重写的过程，真的是吃一堑长一智。为了再也不让这种低级错误重演。今天，跟大家聊聊几种wordpress高效的数据备份方式，帮你节约时间（不如去吃点好吃的），远离这些让人抓狂的重复劳动。</p>
-<p><strong>web 上数据备份和恢复或迁移</strong><br>如果你嫌麻烦，只是偶尔写一篇文章，web上备份数据的方式就可以满足需求<br>如果只是web上备份数据，只需要使用wordpress一些在线备份插件，常见的插件：<br>比如<a target="_blank" rel="noopener" href="https://wordpress.org/plugins/updraftplus/">UpdraftPlus - Backup&#x2F;Restore</a>，]可以对网站的数据进行单独的备份，比如database,plugins,themes,uploads,others等数据分别备份和恢复和迁移。<br><img src="C:\Users\dellier\blog\source\images\UpdraftPlus%20-%20BackupRestore.PNG" alt="UpdraftPlus - BackupRestore.PNG"></p>
-<p><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/all-in-one-wp-migration/">All-in-One WP Migration and Backup</a> 可以备份整个网站的数据，然后恢复或迁移到其他地方，一劳永逸。<br><img src="/images/All-in-One%20WP%20Migration%20and%20Backup.PNG" /></p>
+<p><strong>web 上数据备份和恢复或迁移</strong><br>如果你嫌麻烦，只是偶尔写一篇文章，web上备份数据的方式就可以满足需求<br>如果只是web上备份数据，只需要使用wordpress一些在线备份插件，常见的插件：<br>比如<a target="_blank" rel="noopener" href="https://wordpress.org/plugins/updraftplus/">UpdraftPlus - Backup&#x2F;Restore</a>，]可以对网站的数据进行单独的备份，比如database,plugins,themes,uploads,others等数据分别备份和恢复和迁移。<br><img src="/images/UpdraftPlus%20-%20BackupRestore.PNG" width="1000"/></p>
+<p><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/all-in-one-wp-migration/">All-in-One WP Migration and Backup</a> 可以备份整个网站的数据，然后恢复或迁移到其他地方，一劳永逸。<br><img src="/images/All-in-One%20WP%20Migration%20and%20Backup.PNG" width="1000"/></p>
 <p>    但对于那些每周或者频繁写博客文章或者制作网站的人来说，每次需要在web上修改保存比较麻烦，不如本地测试安全和方便，省心省力。所以今天主要聊聊本地多实例的搭建和配置方法：</p>
 <p><strong>本地网站搭建</strong><br>本地多个独立网站搭建用于数据测试备份和迁移：<br>这篇文章将指导你如何在 Windows 系统下（MacOS,Lunix系统配置方式大同小异），利用 XAMPP 同时快速搭建多个完整的 WordPress 本地环境。无论你是 WordPress 初学者，还是需要本地调试的开发者，都将帮助你顺利完成部署。</p>
 <p>首先建立两个个本地测试样本，一个用于整站样本测试，一个用于单独主题或者插件的样本测试。<br>本地的A网站样本用于插件或者主题测试，网站目录命名为xx.local.single.test;<br>本地的B网站样本用于整站测试，网站目录命名为xx.local.whole.web.test.</p>
 <p>本地程序部署：<br>1：访问<a target="_blank" rel="noopener" href="https://www.apachefriends.org/index.html">XAMPP网站</a>并根据您的计算机系统选择适合的软件版本下载 </p>
-<img src="/images/XAMPP.1.PNG" />
+<img src="/images/XAMPP.1.PNG" width="1000"/>
 安装完成之后启动XAMPP，运行 Apache 和 MySQL,
-<img src="/images/XAMPP.start.PNG" />
-浏览器访问 http://localhost/ 检查是否运行启动成功，
-<img src="/images/success.PNG" />
+<img src="/images/XAMPP.start.PNG" width="1000"/>
+浏览器访问[http://localhost/](http://localhost/) 检查是否运行启动成功，
+<img src="/images/success.PNG" width="1000"/>
 
 <p>2，访问WordPress.org网站，下载最新版本的<a target="_blank" rel="noopener" href="https://wordpress.org/download/">WordPress</a> .</p>
-<img src="/images/wordpress.PNG" />
+<img src="/images/wordpress.PNG" width="1000"/>
 下载 .zip 安装包后解压文件，重命名文件夹为xx.local.single.test，
 复制一份，重命名为xx.local.whole.web.test 。
 两份文件都复制到默认路径（请以你自己设置的XAMPP安装路劲为准） ： C:\xampp\htdocs  
-<img src="/images/wordpress.1.PNG" />
+<img src="/images/wordpress.1.PNG" width="1000"/>
 配置phpmyadmin:
-<img src="/images/phpmyadminstart.PNG" />
+<img src="/images/phpmyadminstart.PNG"/>
 浏览器访问 http://localhost/phpmyadmin， 同时添加两个账户：xx.local.single.test和xx.local.whole.web.test并保存
-<img src="/images/phpadmin1.PNG" />
-<img src="/images/phpadmin2.PNG" />
-<img src="/images/phpadmin3.PNG" />
+<img src="/images/phpadmin1.PNG" width="1000"/>
+<img src="/images/phpadmin2.PNG" width="1000"/>
+<img src="/images/phpadmin3.PNG" width="1000"/>
 
 <p>配置两个网站的wordpress:<br>配置本地xx.local.single.test网站<br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/xx.local.single.test">http://localhost/xx.local.single.test</a> </p>
-<img src="/images/wordpress-set0.PNG" />
-<img src="/images/wordpress-set.PNG" />
-<img src="/images/wordpress-set2.0.png" />
-<img src="/images/wordpress111.PNG" />
-<img src="/images/wordpress111.2.PNG.png" />
-
-<img src="/images/wordpress111.3.PNG" />
+<img src="/images/wordpress-set0.PNG" width="1000"/>
+<img src="/images/wordpress-set.PNG" width="1000"/>
+<img src="/images/wordpress-set2.0.png" width="1000"/>
+<img src="/images/wordpress111.PNG" width="1000"/>
+<img src="/images/wordpress111.2.PNG" width="1000"/>
+<img src="/images/wordpress111.3.PNG"  width="1000"/>
 
 <p>到这一步本地xx.local.single.test网站的用户数据配置就完成了</p>
 <p>重复上面的动作，配置本地xx.local.whole.web.test网站<br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/xx.local.whole.web.test">http://localhost/xx.local.whole.web.test</a> </p>
-<img src="/images/wordpress-set2.1.png" />
+<img src="/images/wordpress-set2.1.png" width="1000"/>
 
 <p>最后登录wordpress，使用本地站点进行wordpress 写作和插件和主题或全站测试， <a target="_blank" rel="noopener" href="http://localhost/xx.local.single.test/wp-admin/">http://localhost/xx.local.single.test/wp-admin/</a> <a target="_blank" rel="noopener" href="http://localhost/xx.local.whole.web.test/wp-admin/">http://localhost/xx.local.whole.web.test/wp-admin/</a> </p>
 <p>还有什么好玩且简单的方式，可以与我分享。谢谢。</p>
@@ -261,7 +260,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/06/14/%E9%9B%B6%E6%9C%88%E7%A7%9F%E7%9A%84%E6%97%A5%E6%9C%ACPovo%202%E6%89%8B%E6%9C%BA%E5%8D%A1,%E4%BB%8E%E8%B8%A9%E5%9D%91%E5%88%B0%E4%B8%8A%E8%88%B9%EF%BC%9A%E5%8F%8B%E8%B0%8A%E7%9A%84%E5%B0%8F%E8%88%B9%E8%AF%B4%E5%BC%80%E5%B0%B1%E5%BC%80/" class="post-title-link" itemprop="url">بدون عنوان</a>
+            <a href="/2025/06/14/%E9%9B%B6%E6%9C%88%E7%A7%9F%E7%9A%84%E6%97%A5%E6%9C%ACPovo%202%E6%89%8B%E6%9C%BA%E5%8D%A1,%E4%BB%8E%E8%B8%A9%E5%9D%91%E5%88%B0%E4%B8%8A%E8%88%B9%EF%BC%9A%E5%8F%8B%E8%B0%8A%E7%9A%84%E5%B0%8F%E8%88%B9%E8%AF%B4%E5%BC%80%E5%B0%B1%E5%BC%80/" class="post-title-link" itemprop="url">Unbenannt</a>
         </h2>
 
         <div class="post-meta">
@@ -269,10 +268,10 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2025-06-14 21:09:19 / عُدل: 21:33:31" itemprop="dateCreated datePublished" datetime="2025-06-14T21:09:19+09:00">2025-06-14</time>
+              <time title="Erstellt: 2025-06-14 21:09:19 / Geändert am: 21:33:31" itemprop="dateCreated datePublished" datetime="2025-06-14T21:09:19+09:00">2025-06-14</time>
             </span>
 
           
@@ -352,22 +351,22 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
-              <time title="أُنشأ: 2025-06-08 18:46:36" itemprop="dateCreated datePublished" datetime="2025-06-08T18:46:36+09:00">2025-06-08</time>
+              <time title="Erstellt: 2025-06-08 18:46:36" itemprop="dateCreated datePublished" datetime="2025-06-08T18:46:36+09:00">2025-06-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2025-06-14 21:54:18" itemprop="dateModified" datetime="2025-06-14T21:54:18+09:00">2025-06-14</time>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2025-08-02 21:31:35" itemprop="dateModified" datetime="2025-08-02T21:31:35+09:00">2025-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Financial/" itemprop="url" rel="index"><span itemprop="name">Financial</span></a>
                 </span>
@@ -423,7 +422,7 @@
 <p>未来展望：SBI证券的发展前景</p>
 <p>在金融科技不断渗透传统行业的时代背景下，SBI证券的未来充满无限可能。预计随着技术的进一步演进与全球化浪潮的冲击，SBI证券将不断加强在国际市场的布局，推动更多创新服务落地，进一步巩固其在网络券商领域的领先优势。从安全性到用户体验，再到产品的广泛覆盖，未来的 SBI证券将继续为投资者提供高效、低成本且智能化的交易解决方案。</p>
 <p><a target="_blank" rel="noopener" href="https://www.sbisec.co.jp/">SBI证券homepage</a>:<br><a target="_blank" rel="noopener" href="https://go.sbisec.co.jp/account/sogoflow_01.htm">口座開設の流れ</a>：</p>
-<img src="/images/SBI2.png" alt=" SBI証券総合口座開設申込手続き流れ">
+<img src="/images/SBI2.png" alt=" SBI証券総合口座開設申込手続き流れ" />
 
 <p><a target="_blank" rel="noopener" href="https://pc.moppy.jp/search/?word=SBI%E8%A8%BC%E5%88%B8">同过moppy申请账户开设SBI证券账户，并获得最高24500 point</a></p>
 <img src="/images/SBI3.png" alt="moppy申请开设SBI证券账户"/>
@@ -471,16 +470,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
-              <time title="أُنشأ: 2025-06-08 12:16:57 / عُدل: 16:52:56" itemprop="dateCreated datePublished" datetime="2025-06-08T12:16:57+09:00">2025-06-08</time>
+              <time title="Erstellt: 2025-06-08 12:16:57 / Geändert am: 16:52:56" itemprop="dateCreated datePublished" datetime="2025-06-08T12:16:57+09:00">2025-06-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">in</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
                 </span>
@@ -557,10 +556,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          المحتويات
+          Inhaltsverzeichnis
         </li>
         <li class="sidebar-nav-overview">
-          عام
+          Übersicht
         </li>
       </ul>
 
@@ -580,18 +579,18 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">المقالات</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
         <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">التصنيفات</span></a>
+        <span class="site-state-item-name">Kategorien</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
         <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">الوسوم</span></a>
+        <span class="site-state-item-name">schlagwörter</span></a>
       </div>
   </nav>
 </div>
@@ -743,7 +742,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Bungunpunk</span>
 </div>
-  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
         
