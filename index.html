@@ -173,7 +173,7 @@
               <span class="post-meta-item-text">نُشر في</span>
               
 
-              <time title="أُنشأ: 2025-08-02 19:33:39 / عُدل: 20:42:05" itemprop="dateCreated datePublished" datetime="2025-08-02T19:33:39+09:00">2025-08-02</time>
+              <time title="أُنشأ: 2025-08-02 19:33:39 / عُدل: 20:59:39" itemprop="dateCreated datePublished" datetime="2025-08-02T19:33:39+09:00">2025-08-02</time>
             </span>
 
           
@@ -189,21 +189,43 @@
       
           <p>前言<br>    在数字时代，拥有一个自己的博客网站不仅能够展示个人观点，也是促进技术成长的重要途径。作为全球最受欢迎的博客系统之一，WordPress 以其丰富的插件、凭借其高度灵活、可定制的主题功能，以及一个充满活力、积极互动的庞大用户社区，WordPress赢得了全球众多网站创建者和内容创作者的广泛喜爱与持续支持。<br>    但是，不当操作WordPress主题或插件时，可能会引发一系列问题，包括：数据损坏、网站无法正常访问、底层数据无法修复，文章post，page数据丢失。这些风险往往源于插件或主题存在漏洞未及时更新、数据配置不正确或与现有系统不兼容等原因。<br>    今天写这篇博文记录一下前段时间折腾 WordPress 时，踩过的坑。一个看起来酷炫的主题安装后直接把后台锁死，让我连控制台都进不去；还有一次没及时备份数据，不小心安装了一个插件，所有的个人设置瞬间被覆盖，之前辛辛苦苦写的内容只能从头来过。那种心累和重写的过程，真的是吃一堑长一智。为了再也不让这种低级错误重演。今天，跟大家聊聊几种wordpress高效的数据备份方式，帮你节约时间（不如去吃点好吃的），远离这些让人抓狂的重复劳动。</p>
 <p><strong>web 上数据备份和恢复或迁移</strong><br>如果你嫌麻烦，只是偶尔写一篇文章，web上备份数据的方式就可以满足需求<br>如果只是web上备份数据，只需要使用wordpress一些在线备份插件，常见的插件：<br>比如<a target="_blank" rel="noopener" href="https://wordpress.org/plugins/updraftplus/">UpdraftPlus - Backup&#x2F;Restore</a>，]可以对网站的数据进行单独的备份，比如database,plugins,themes,uploads,others等数据分别备份和恢复和迁移。<br><img src="C:\Users\dellier\blog\source\images\UpdraftPlus%20-%20BackupRestore.PNG" alt="UpdraftPlus - BackupRestore.PNG"></p>
-<p><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/all-in-one-wp-migration/">All-in-One WP Migration and Backup</a> 可以备份整个网站的数据，然后恢复或迁移到其他地方，一劳永逸。<br><img src="C:\Users\dellier\blog\source\images\All-in-One%20WP%20Migration%20and%20Backup.PNG" alt="All-in-One WP Migration and Backup.PNG"></p>
+<p><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/all-in-one-wp-migration/">All-in-One WP Migration and Backup</a> 可以备份整个网站的数据，然后恢复或迁移到其他地方，一劳永逸。<br><img src="/images/All-in-One%20WP%20Migration%20and%20Backup.PNG" /></p>
 <p>    但对于那些每周或者频繁写博客文章或者制作网站的人来说，每次需要在web上修改保存比较麻烦，不如本地测试安全和方便，省心省力。所以今天主要聊聊本地多实例的搭建和配置方法：</p>
 <p><strong>本地网站搭建</strong><br>本地多个独立网站搭建用于数据测试备份和迁移：<br>这篇文章将指导你如何在 Windows 系统下（MacOS,Lunix系统配置方式大同小异），利用 XAMPP 同时快速搭建多个完整的 WordPress 本地环境。无论你是 WordPress 初学者，还是需要本地调试的开发者，都将帮助你顺利完成部署。</p>
 <p>首先建立两个个本地测试样本，一个用于整站样本测试，一个用于单独主题或者插件的样本测试。<br>本地的A网站样本用于插件或者主题测试，网站目录命名为xx.local.single.test;<br>本地的B网站样本用于整站测试，网站目录命名为xx.local.whole.web.test.</p>
 <p>本地程序部署：<br>1：访问<a target="_blank" rel="noopener" href="https://www.apachefriends.org/index.html">XAMPP网站</a>并根据您的计算机系统选择适合的软件版本下载 </p>
-<p><img src="C:\Users\dellier\blog\source\images\XAMPP.1.PNG" alt="XAMPP.1.PNG"><br>安装完成之后启动XAMPP，运行 Apache 和 MySQL,<br><img src="C:\Users\dellier\blog\source\images\XAMPP.start.PNG" alt="XAMPP.start.PNG"><br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/">http://localhost/</a> 检查是否运行启动成功，<br><img src="C:\Users\dellier\blog\source\images\success.PNG" alt="success.PNG"></p>
+<img src="/images/XAMPP.1.PNG" />
+安装完成之后启动XAMPP，运行 Apache 和 MySQL,
+<img src="/images/XAMPP.start.PNG" />
+浏览器访问 http://localhost/ 检查是否运行启动成功，
+<img src="/images/success.PNG" />
+
 <p>2，访问WordPress.org网站，下载最新版本的<a target="_blank" rel="noopener" href="https://wordpress.org/download/">WordPress</a> .</p>
-<p><img src="C:\Users\dellier\blog\source\images\wordpress.PNG" alt="wordpress.PNG"><br>下载 .zip 安装包后解压文件，重命名文件夹为xx.local.single.test，<br>复制一份，重命名为xx.local.whole.web.test 。<br>两份文件都复制到默认路径（请以你自己设置的XAMPP安装路劲为准） ： C:\xampp\htdocs<br><img src="C:\Users\dellier\blog\source\images\wordpress.1.PNG" alt="wordpress.1.PNG"><br>配置phpmyadmin:<br><img src="C:\Users\dellier\blog\source\images\phpmyadminstart.PNG" alt="phpmyadminstart.PNG"><br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/phpmyadmin%EF%BC%8C">http://localhost/phpmyadmin，</a> 同时添加两个账户：xx.local.single.test和xx.local.whole.web.test并保存<br><img src="C:\Users\dellier\blog\source\images\phpadmin1.PNG" alt="phpadmin1.PNG"><br><img src="C:\Users\dellier\blog\source\images\phpadmin2.PNG" alt="phpadmin2.PNG"><br><img src="C:\Users\dellier\blog\source\images\phpadmin3.PNG" alt="phpadmin3.PNG"></p>
+<img src="/images/wordpress.PNG" />
+下载 .zip 安装包后解压文件，重命名文件夹为xx.local.single.test，
+复制一份，重命名为xx.local.whole.web.test 。
+两份文件都复制到默认路径（请以你自己设置的XAMPP安装路劲为准） ： C:\xampp\htdocs  
+<img src="/images/wordpress.1.PNG" />
+配置phpmyadmin:
+<img src="/images/phpmyadminstart.PNG" />
+浏览器访问 http://localhost/phpmyadmin， 同时添加两个账户：xx.local.single.test和xx.local.whole.web.test并保存
+<img src="/images/phpadmin1.PNG" />
+<img src="/images/phpadmin2.PNG" />
+<img src="/images/phpadmin3.PNG" />
+
 <p>配置两个网站的wordpress:<br>配置本地xx.local.single.test网站<br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/xx.local.single.test">http://localhost/xx.local.single.test</a> </p>
-<p><img src="C:\Users\dellier\blog\source\images\wordpress-set0.PNG" alt="wordpress-set0.PNG"><br><img src="C:\Users\dellier\blog\source\images\wordpress-set.PNG" alt="wordpress-set.PNG"><br><img src="C:\Users\dellier\blog\source\images\wordpress-set2.0.png" alt="wordpress-set2.0"><br><img src="C:\Users\dellier\blog\source\images\wordpress111.PNG" alt="wordpress111"><br><img src="C:\Users\dellier\blog\source\images\wordpress111.2.PNG.png" alt="wordpress111.2.PNG"></p>
-<img src="file:///C:/Users/dellier/blog/source/images/wordpress111.3.PNG" title="" alt="wordpress111.3.PNG" width="664">
+<img src="/images/wordpress-set0.PNG" />
+<img src="/images/wordpress-set.PNG" />
+<img src="/images/wordpress-set2.0.png" />
+<img src="/images/wordpress111.PNG" />
+<img src="/images/wordpress111.2.PNG.png" />
+
+<img src="/images/wordpress111.3.PNG" />
 
 <p>到这一步本地xx.local.single.test网站的用户数据配置就完成了</p>
 <p>重复上面的动作，配置本地xx.local.whole.web.test网站<br>浏览器访问<a target="_blank" rel="noopener" href="http://localhost/xx.local.whole.web.test">http://localhost/xx.local.whole.web.test</a> </p>
-<p><img src="C:\Users\dellier\blog\source\images\wordpress-set2.1.png" alt="wordpress-set2.1.png"></p>
+<img src="/images/wordpress-set2.1.png" />
+
 <p>最后登录wordpress，使用本地站点进行wordpress 写作和插件和主题或全站测试， <a target="_blank" rel="noopener" href="http://localhost/xx.local.single.test/wp-admin/">http://localhost/xx.local.single.test/wp-admin/</a> <a target="_blank" rel="noopener" href="http://localhost/xx.local.whole.web.test/wp-admin/">http://localhost/xx.local.whole.web.test/wp-admin/</a> </p>
 <p>还有什么好玩且简单的方式，可以与我分享。谢谢。</p>
 
